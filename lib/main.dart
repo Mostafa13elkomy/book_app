@@ -1,3 +1,5 @@
+import 'package:book_app/constances.dart';
+import 'package:book_app/features/presentation/views/widgets/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -8,12 +10,14 @@ void main() {
 class BooklyApp extends StatelessWidget {
   const BooklyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-    home:SplashView(),
-    
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData().copyWith(
+        scaffoldBackgroundColor:kPrimaryColor,
+      ),
+      home: const SplashView(),
     );
   }
 }
