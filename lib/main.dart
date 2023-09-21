@@ -1,5 +1,5 @@
 import 'package:book_app/constances.dart';
-import 'package:book_app/features/presentation/views/widgets/splash_view.dart';
+import 'package:book_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
