@@ -22,7 +22,7 @@ class BookRating extends StatelessWidget {
         width: 5,
       ),
         Text('(224)',
-      style: Styles.textStyle14.copyWith(color: Color.fromARGB(255, 163, 173, 167))
+      style: Styles.textStyle14.copyWith(color:const Color.fromARGB(255, 163, 173, 167))
       
       )
       ],
