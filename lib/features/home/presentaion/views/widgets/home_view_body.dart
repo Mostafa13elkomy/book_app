@@ -15,7 +15,7 @@ class HomeViewBody extends StatelessWidget {
         CustomAppBar(),
         FeaturedBooksListView(),
         Padding(
-          padding: EdgeInsets.only(left: 28, top: 33),
+          padding: EdgeInsets.only(left: 30, top: 33),
           child: Text(
             'Best Seller',
             style: Styles.textStyle18,
@@ -26,26 +26,40 @@ class HomeViewBody extends StatelessWidget {
     );
   }
 }
+
 class BestSellerListView extends StatelessWidget {
   const BestSellerListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-  height: 125,
-      child: AspectRatio(
-        aspectRatio: 2.7 / 4,
-        child: Container(
-          decoration:  BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-              image:const DecorationImage(
-            image: AssetImage(AssetData.testImage),
-          )),
+          height: 125,
+          child: AspectRatio(
+            aspectRatio: 2.7 / 4,
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: const DecorationImage(
+                    image: AssetImage(AssetData.testImage),
+                  )),
+            ),
+          ),
         ),
-      ),
-    )
+        const SizedBox(
+          width: 30,
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * .5,
+          child: const Text(
+            'hdfhyu jjidjfi kmjij iji iyuimk grfgf',
+            style: Styles.textStyle20,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        )
       ],
     );
   }
