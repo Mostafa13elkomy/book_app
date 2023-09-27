@@ -1,8 +1,9 @@
 import 'package:book_app/core/utlis/styles.dart';
 import 'package:book_app/features/home/presentaion/views/widgets/book_rating.dart';
 import 'package:book_app/features/home/presentaion/views/widgets/books_action.dart';
-import 'package:book_app/features/home/presentaion/views/widgets/custom_book_details_app_bar.dart';
+import 'package:book_app/features/home/presentaion/views/widgets/books_similar_list_view.dart';
 import 'package:book_app/features/home/presentaion/views/widgets/custom_book%20_item.dart';
+import 'package:book_app/features/home/presentaion/views/widgets/custom_book_details_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
@@ -18,10 +19,11 @@ class BookDetailsViewBody extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * .18),
-            child: const CustomBookImage(),
+            child: const SizedBox(height: 265,
+              child: CustomBookImage()),
           ),
           const SizedBox(
-            height: 43,
+            height: 30,
           ),
           const Text(
             'The Jungle Book',
@@ -44,10 +46,29 @@ class BookDetailsViewBody extends StatelessWidget {
           const BookRating(
             mainAxisAlignment: MainAxisAlignment.center,
           ),
-            const SizedBox(
-            height: 37,
+          const SizedBox(
+            height: 30,
           ),
           const BooksAction(),
+          const SizedBox(
+            height: 33,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'You can also like',
+              style: Styles.textStyle16.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 13,
+          ),
+          const SimilarBooksListView(),
+          const SizedBox(
+            height: 38,
+          ),
         ],
       ),
     );
