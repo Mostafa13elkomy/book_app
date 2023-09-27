@@ -7,7 +7,7 @@ class SimilarBooksListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * .15,
+      height: MediaQuery.of(context).size.height * .16,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 10,
