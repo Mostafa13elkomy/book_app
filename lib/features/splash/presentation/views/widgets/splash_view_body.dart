@@ -1,10 +1,8 @@
-import 'package:book_app/constances.dart';
-import 'package:book_app/core/utlis/app_router.dart';
-import 'package:book_app/core/utlis/assets.dart';
-import 'package:book_app/features/home/presentaion/views/home_view.dart';
-import 'package:book_app/features/splash/presentation/views/widgets/slidingtext.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:book_app/core/utlis/app_router.dart';
+import 'package:book_app/core/utlis/assets.dart';
+import 'package:book_app/features/splash/presentation/views/widgets/slidingtext.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
