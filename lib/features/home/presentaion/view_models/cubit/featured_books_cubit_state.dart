@@ -8,7 +8,7 @@ class FeaturedBooksCubitInitial extends FeaturedBooksCubitState {}
 class FeaturedBooksLoading extends FeaturedBooksCubitState {}
 
 class FeaturedBooksSuccess extends FeaturedBooksCubitState {
-  List<BookModel> books;
+ final List<BookModel> books;
   FeaturedBooksSuccess({
     required this.books,
   });
