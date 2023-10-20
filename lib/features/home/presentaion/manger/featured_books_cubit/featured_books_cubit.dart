@@ -3,28 +3,22 @@ import 'package:book_app/features/home/data/models/book_model/book_model.dart';
 import 'package:book_app/features/home/data/repos/home_repo.dart';
 import 'package:meta/meta.dart';
 
-part 'featured_books_cubit_state.dart';
+part 'featured_books_state.dart';
 
-class FeaturedBooksCubit extends Cubit<FeaturedBooksCubitState> {
+class FeaturedBooksCubit extends Cubit<FeaturedBooksState> {
   FeaturedBooksCubit(
     this.homeRepo,
-  ) : super(
-          FeaturedBooksCubitInitial(),
-        );
+  ) : super(FeaturedBooksInitial());
 
   final HomeRepo homeRepo;
 
   Future<void> fetchFeaturedBooks() async {
-    emit(
-      FeaturedBooksLoading(),
-    );
+    emit(FeaturedBooksLoading());
     var result = await homeRepo.fetchFeaturedBooks();
     result.fold((failure) {
-      emit(
-        FeaturedBooksFailure(errMessage: failure.errMessage),
-      );
+      emit(FeaturedBooksFailure(failure.errMessage));
     }, (books) {
-      emit(FeaturedBooksSuccess(books: books));
+      emit(FeaturedBooksSuccess(books));
     });
   }
 }
