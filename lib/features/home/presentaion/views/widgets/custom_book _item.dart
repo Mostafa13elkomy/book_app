@@ -1,5 +1,6 @@
-import 'package:book_app/core/utlis/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:book_app/core/utlis/assets.dart';
+
 
 class CustomBookImage extends StatelessWidget {
   const CustomBookImage({super.key});
