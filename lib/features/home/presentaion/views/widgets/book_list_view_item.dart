@@ -1,13 +1,14 @@
 import 'package:book_app/core/utlis/app_router.dart';
-import 'package:book_app/core/utlis/assets.dart';
 import 'package:book_app/core/utlis/styles.dart';
+import 'package:book_app/features/home/data/models/book_model/book_model.dart';
 import 'package:book_app/features/home/presentaion/views/widgets/book_rating.dart';
+import 'package:book_app/features/home/presentaion/views/widgets/custom_book%20_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BookListViewItem extends StatelessWidget {
-  const BookListViewItem({super.key});
-
+  const BookListViewItem({super.key, required this.bookModel});
+  final BookModel bookModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -19,16 +20,7 @@ class BookListViewItem extends StatelessWidget {
         children: [
           SizedBox(
             height: 125,
-            child: AspectRatio(
-              aspectRatio: 2.7 / 4,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: const DecorationImage(
-                      image: AssetImage(AssetData.testImage),
-                    )),
-              ),
-            ),
+            child:CustomBookImage(imageUrl: bookModel.volumeInfo.imageLinks.thumbnail)
           ),
           const SizedBox(
             width: 30,
@@ -42,8 +34,8 @@ class BookListViewItem extends StatelessWidget {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .5,
-                  child: const Text(
-                    'hdfhyu jjidjfi kmjij iji iyuimk grfgf',
+                  child: Text(
+                    bookModel.volumeInfo.title!,
                     style: Styles.textStyle20,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -53,7 +45,7 @@ class BookListViewItem extends StatelessWidget {
                   height: 3,
                 ),
                 Text(
-                  'icf fvfjb',
+                  bookModel.volumeInfo.authors![0],
                   style:
                       Styles.textStyle14.copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -64,12 +56,14 @@ class BookListViewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '19.99 €',
+                      'Free',
                       style: Styles.textStyle20
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
-                    const BookRating()
+                      BookRating(rating: bookModel.volumeInfo.averageRating ?? 0,
+                      count: bookModel.volumeInfo.ratingsCount ?? 0,
+                      )
                   ],
                 ),
               ],
