@@ -14,7 +14,7 @@ class FeaturedBooksListView extends StatelessWidget {
       builder: (context, state) {
         if (state is FeaturedBooksSuccess) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SizedBox(
               height: MediaQuery.of(context).size.height * .3,
               child: ListView.builder(
@@ -23,7 +23,7 @@ class FeaturedBooksListView extends StatelessWidget {
                 itemCount: state.books.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding:const EdgeInsets.only(left: 4),
+                    padding:const EdgeInsets.only(left: 16),
                     child: CustomBookImage(imageUrl:state.books[index].volumeInfo.imageLinks.thumbnail),
                   );
                 },
