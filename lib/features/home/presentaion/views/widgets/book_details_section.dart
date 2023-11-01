@@ -1,6 +1,5 @@
 import 'package:book_app/core/utlis/styles.dart';
 import 'package:book_app/features/home/data/models/book_model/book_model.dart';
-import 'package:book_app/features/home/presentaion/views/widgets/book_rating.dart';
 import 'package:book_app/features/home/presentaion/views/widgets/books_action.dart';
 import 'package:book_app/features/home/presentaion/views/widgets/custom_book%20_item.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +49,9 @@ class BookDetailsSection extends StatelessWidget {
         const SizedBox(
           height: 30,
         ),
-        const BooksAction(),
+        BooksAction(
+          bookModel: bookModel,
+        ),
         const SizedBox(
           height: 33,
         ),
