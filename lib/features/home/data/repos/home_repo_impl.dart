@@ -1,3 +1,4 @@
+import 'package:book_app/core/errors/custom_error_widget.dart';
 import 'package:book_app/core/errors/failures.dart';
 import 'package:book_app/core/utlis/api_services.dart';
 import 'package:book_app/features/home/data/models/book_model/book_model.dart';
@@ -10,7 +11,7 @@ class HomeRepoImpl implements HomeRepo {
 
   HomeRepoImpl(this.apiService);
   @override
-  Future<Either<Failures, List<BookModel>>> fetchNewestBooks() async {
+  Future<Either<Failure, List<BookModel>>> fetchNewestBooks() async {
     try {
       var data = await apiService.get(
           endPoint:
@@ -23,19 +24,19 @@ class HomeRepoImpl implements HomeRepo {
     } catch (e) {
       if (e is DioException) {
         return left(
-          ServerFailure.fromDioExption(e),
+          ServerFailure.fromDioError(e),
         );
       }
       return left(
         ServerFailure(
-          errMessage: e.toString(),
+          e.toString()
         ),
       );
     }
   }
 
   @override
-  Future<Either<Failures, List<BookModel>>> fetchFeaturedBooks() async {
+  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
     try {
       var data = await apiService.get(
           endPoint:
@@ -48,19 +49,19 @@ class HomeRepoImpl implements HomeRepo {
     } catch (e) {
       if (e is DioException) {
         return left(
-          ServerFailure.fromDioExption(e),
+          ServerFailure.fromDioError(e),
         );
       }
       return left(
         ServerFailure(
-          errMessage: e.toString(),
+          e.toString(),
         ),
       );
     }
   }
   
   @override
-  Future<Either<Failures, List<BookModel>>> fetchSimilarBooks({required String category}) async {
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks({required String category}) async {
       try {
       var data = await apiService.get(
           endPoint:
@@ -73,12 +74,12 @@ class HomeRepoImpl implements HomeRepo {
     } catch (e) {
       if (e is DioException) {
         return left(
-          ServerFailure.fromDioExption(e),
+          ServerFailure (e.toString()),
         );
       }
       return left(
         ServerFailure(
-          errMessage: e.toString(),
+          e.toString(),
         ),
       );
     }

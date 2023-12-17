@@ -1,4 +1,6 @@
+import 'package:book_app/features/search/presentation/views/search_books_cubit/search_books_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -9,6 +11,10 @@ class CustomTextField extends StatelessWidget {
     return Column(
       children: [
         TextField(
+          onSubmitted: (data) {
+            BlocProvider.of<SearchCubit>(context)
+                .fetchSearedBooks(bookName: data);
+          },
           decoration: InputDecoration(
             enabledBorder: buildOutLinInputBorder(),
             focusedBorder: buildOutLinInputBorder(),
@@ -16,7 +22,16 @@ class CustomTextField extends StatelessWidget {
             suffixIcon: Opacity(
               opacity: .8,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (SearchCubit.get(context)
+                      .searchController
+                      .text
+                      .isNotEmpty) {
+                    SearchCubit.get(context).fetchSearedBooks(
+                        bookName:
+                            SearchCubit.get(context).searchController.text);
+                  }
+                },
                 icon: const Icon(
                   FontAwesomeIcons.magnifyingGlass,
                   size: 22,

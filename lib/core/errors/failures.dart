@@ -1,50 +1,50 @@
 import 'package:dio/dio.dart';
 
-abstract class Failures {
+abstract class Failure {
   final String errMessage;
 
-  Failures({required this.errMessage});
+  const Failure(this.errMessage);
 }
 
-class ServerFailure extends Failures {
-  ServerFailure({required super.errMessage});
+class ServerFailure extends Failure {
+  ServerFailure(super.errMessage);
 
-  factory ServerFailure.fromDioExption(DioException dioException) {
-    switch (dioException.type) {
-      case DioExceptionType.connectionTimeout:
-        return ServerFailure(errMessage: 'Connection timeout with ApiServer');
-      case DioExceptionType.sendTimeout:
-        return ServerFailure(errMessage: 'Send timeout with ApiServer');
-      case DioExceptionType.receiveTimeout:
-        return ServerFailure(errMessage: 'Receive timeout with ApiServer');
-      case DioExceptionType.badCertificate:
-      // TODO: Handle this case.
-      case DioExceptionType.badResponse:
-        return ServerFailure.fromDioResponse(
-            dioException.response!.statusCode!, dioException.response!.data);
-      case DioExceptionType.cancel:
-        return ServerFailure(errMessage: 'Request to api was canceled');
-      case DioExceptionType.connectionError:
-        return ServerFailure(errMessage: 'Check your internet');
-      case DioExceptionType.unknown:
-        return ServerFailure(errMessage: 'Unexpected Case');
+  factory ServerFailure.fromDioError(DioError dioError) {
+    switch (dioError.type) {
+      case DioErrorType.connectionTimeout:
+        return ServerFailure('Connection timeout with ApiServer');
+
+      case DioErrorType.sendTimeout:
+        return ServerFailure('Send timeout with ApiServer');
+
+      case DioErrorType.receiveTimeout:
+        return ServerFailure('Receive timeout with ApiServer');
+
+      case DioErrorType.badResponse:
+        return ServerFailure.fromResponse(
+            dioError.response!.statusCode, dioError.response!.data);
+      case DioErrorType.cancel:
+        return ServerFailure('Request to ApiServer was canceld');
+
+      case DioErrorType.unknown:
+        if (dioError.message!.contains('SocketException')) {
+          return ServerFailure('No Internet Connection');
+        }
+        return ServerFailure('Unexpected Error, Please try again!');
       default:
-        return ServerFailure(
-            errMessage: 'Oops! there was an error, please try again');
+        return ServerFailure('Opps There was an Error, Please try again');
     }
   }
 
-  factory ServerFailure.fromDioResponse(int statecode, dynamic response) {
-    if (statecode == 400 || statecode == 401 || statecode == 403) {
-      return ServerFailure(errMessage: response['error']['messaage']);
-    } else if (statecode == 404) {
-      return ServerFailure(errMessage: 'Method Not Found, Please Try Later!');
-    } else if (statecode == 405) {
-      return ServerFailure(
-          errMessage: 'Internal Server Error, Please Try Later!');
+  factory ServerFailure.fromResponse(int? statusCode, dynamic response) {
+    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+      return ServerFailure(response['error']['message']);
+    } else if (statusCode == 404) {
+      return ServerFailure('Your request not found, Please try later!');
+    } else if (statusCode == 500) {
+      return ServerFailure('Internal Server error, Please try later');
     } else {
-      return ServerFailure(
-          errMessage: 'Oops! there was an error, please try later');
+      return ServerFailure('Opps There was an Error, Please try again');
     }
   }
 }
